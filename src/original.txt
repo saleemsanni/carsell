@@ -1,0 +1,121 @@
+ User
+here is a updated code import React, { useState } from "react"
+import "/Users/ziasunny/Desktop/SAYEED/Task 1/src/App.css"
+
+const data = [
+  {
+    id: 1,
+    name: "Item 1",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg",
+  },
+  {
+    id: 2,
+    name: "Item 2",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2015/05/28/23/12/auto-788747_1280.jpg",
+  },
+  {
+    id: 3,
+    name: "Item 3",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  {
+    id: 4,
+    name: "Item 4",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  {
+    id: 5,
+    name: "Item 5",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  {
+    id: 6,
+    name: "Item 6",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  {
+    id: 7,
+    name: "Item 7",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  {
+    id: 8,
+    name: "Item 8",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  {
+    id: 9,
+    name: "Item 9",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  {
+    id: 10,
+    name: "Item 10",
+    imageUrl:
+      "https://cdn.pixabay.com/photo/2012/11/02/13/02/car-63930_1280.jpg",
+  },
+  // Add more data items here...
+]
+
+const ITEMS_PER_PAGE = 5
+
+function App() {
+  const [currentPage, setCurrentPage] = useState(1)
+  const [searchTerm, setSearchTerm] = useState("")
+
+  const filteredData = data.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
+  const pageCount = Math.ceil(filteredData.length / ITEMS_PER_PAGE)
+
+  const handleChangePage = (newPage) => {
+    setCurrentPage(newPage)
+  }
+
+  return (
+    <div>
+      <input
+        type='text'
+        placeholder='Search...'
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <ul>
+        {filteredData
+          .slice(
+            (currentPage - 1) * ITEMS_PER_PAGE,
+            currentPage * ITEMS_PER_PAGE
+          )
+          .map((item) => (
+            <li key={item.id}>
+              <img src={item.imageUrl} alt={item.name} />
+              <p>{item.name}</p>
+            </li>
+          ))}
+      </ul>
+      <div>
+        {Array.from({ length: pageCount }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handleChangePage(index + 1)}
+            disabled={currentPage === index + 1}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default App

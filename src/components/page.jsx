@@ -1,10 +1,7 @@
-import React, { useState } from "react"
-import "./App.css"
-import data from "./api/products"
+import React from "react"
 
 const ITEMS_PER_PAGE = 6
-
-function App() {
+const Page = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState("")
 
@@ -29,7 +26,6 @@ function App() {
       setCurrentPage(currentPage + 1)
     }
   }
-
   return (
     <div className='flex'>
       <div className='search'>
@@ -105,4 +101,4 @@ function App() {
   )
 }
 
-export default App
+export default Page
